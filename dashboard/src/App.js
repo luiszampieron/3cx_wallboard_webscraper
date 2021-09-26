@@ -1,8 +1,11 @@
 import Header from "./components/header"
+import './styled_app'
+import GlobalStyle from "./styled_app"
 
 function App() {
   return (
     <div className="App">
+      <GlobalStyle/>
       <Header/>
     </div>
   )

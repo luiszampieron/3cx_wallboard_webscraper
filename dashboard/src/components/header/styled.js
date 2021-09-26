@@ -7,6 +7,7 @@ const Cabecalho = styled.header`
 
     background-color: #333333;
     justify-content: center;
+    box-shadow: 0 0 20px #000000;
     
 `
 
@@ -18,14 +19,14 @@ const Container = styled.div`
 const Logo = styled.img`
     width: auto;
     height: auto;
-    padding: 5px 0 5px 0;
+    padding: 10px 0 3px 0;
 `
 
 const Title = styled.h1`
     font-family: sans-serif, Arial; 
     color: #EEEEEE;
     font-style: italic;
-    font-size: 3vw;
+    font-size: 50px;
     
 `
 

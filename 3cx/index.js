@@ -1,5 +1,6 @@
 const { Builder, By, Key, until, element } = require('selenium-webdriver')
 const configs = require('./configs')
+const fetch = require('cross-fetch')
 
 async function get_data() {
     let driver = await new Builder().forBrowser('firefox').build()
@@ -24,6 +25,14 @@ async function get_data() {
             if (arrayElement[i].length == 2 || arrayElement[i].slice(0, 1) == "Q") {
                 arrayElement.splice(i, 1)
                 i = 0
+
+            }
+        }
+
+        for (let i = 0; i < arrayElement.length; i++) {
+            if (arrayElement[i].slice(0, 1) == "0") {
+                arrayElement.splice(i - 1, 2)
+                i = 0
             }
         }
 
@@ -36,7 +45,6 @@ async function get_data() {
         }
 
         return arr
-
     }
 
     async function active_calls() {
@@ -79,21 +87,27 @@ async function get_data() {
         }
 
         return arr
-
     }
-
-
+    
     setInterval(() => {
         async function CreateJSON() {
             data_active_calls = await active_calls()
             data_queue_agents = await queue_agents()
 
-            json = [{
+            data = {
                 "active_calls": data_active_calls,
                 "queue_agents": data_queue_agents
-            }]
+            }
 
-            console.log(JSON.stringify(json))
+            const connectionApi = await fetch('http://localhost:4000/api', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+        console.log(JSON.stringify(data))
         }
         CreateJSON()
     }, 5000)

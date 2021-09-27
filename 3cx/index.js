@@ -17,6 +17,7 @@ async function get_data() {
 
     async function queue_agents() {
         const arr = []
+
         const elements = await driver.findElements(By.css("ul"));
         const element = await elements[1].getText()
         const arrayElement = element.split('\n')
@@ -88,15 +89,35 @@ async function get_data() {
 
         return arr
     }
-    
+
+    async function queue_stats() {
+        const findElementStats = await driver.findElements(By.css("queue-stat"))
+        const elements = await findElementStats[0].getText()
+        const element = elements.split('\n')
+        const arrayElement = element[1].split(' ')
+
+        obj = {
+            "waiting": arrayElement[0],
+            "serviced": arrayElement[1],
+            "abandoned": arrayElement[2],
+            "longest_waiting": arrayElement[3],
+            "average_waiting_time": arrayElement[4],
+            "average_talking_time": arrayElement[5],
+        }
+
+        return obj
+    }
+
     setInterval(() => {
         async function CreateJSON() {
             data_active_calls = await active_calls()
             data_queue_agents = await queue_agents()
+            data_queue_stats = await queue_stats()
 
             data = {
                 "active_calls": data_active_calls,
-                "queue_agents": data_queue_agents
+                "queue_agents": data_queue_agents,
+                "queue_stats": data_queue_stats
             }
 
             const connectionApi = await fetch('http://localhost:4000/api', {

@@ -1,4 +1,4 @@
-let value = {}
+let value = {active_calls: [], queue_agents: []}
 
 module.exports.api_salvar = function(application, req, res) {
     console.log(req.body)

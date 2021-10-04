@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Cabecalho = styled.header`
     display: flex;
-    height: 90px;
+    height: 10vh;
     width: 100%;
 
     background-color: #333333;
@@ -23,7 +23,6 @@ const Logo = styled.img`
 `
 
 const Title = styled.h1`
-    font-family: sans-serif, Arial; 
     color: #EEEEEE;
     font-style: italic;
     font-size: 50px;

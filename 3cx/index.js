@@ -1,6 +1,6 @@
 const { Builder, By, Key, until, element } = require('selenium-webdriver')
 const fetch = require('cross-fetch')
-const configs = require('./configs')
+const configs = require('../configs')
 
 
 // Retorna um array de objetos que mostram a quantidade de ligação de todos os técnicos
@@ -95,7 +95,7 @@ async function active_calls(driver) {
 // Faz o post na api
 async function connectionApi(data) {
     try {
-        await fetch('http://localhost:4000/api', {
+        await fetch(configs.ipMachine + '4000/api', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -132,7 +132,7 @@ async function CreateJSON(driver) {
 async function get_data() {
     let driver = await new Builder().forBrowser('firefox').build()
 
-    await driver.get(configs.url)
+    await driver.get(configs.urlLogin)
     await driver.findElement(By.id('loginInput')).sendKeys(configs.user)
     await driver.findElement(By.id('passwordInput')).sendKeys(configs.password, Key.RETURN)
 

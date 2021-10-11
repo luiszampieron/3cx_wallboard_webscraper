@@ -1,10 +1,10 @@
-import { Title, Serviced, Container } from "./styled"
+import { Section, Title, Serviced } from "./styled"
 
 export default ({user, serviced_abandoned_time}) => {
     return (
-        <Container>
-            <Title>Técnico: {user}</Title>
+        <Section>
+            <Title>{user}</Title>
             <Serviced>{serviced_abandoned_time}</Serviced>
-        </Container>
+        </Section>
     )
 }

@@ -1,5 +1,5 @@
 const basicFetch = async (endpoint) => {
-   const req = await fetch("http://localhost:4000/api")
+   const req = await fetch("http://172.16.10.32:4000/api")
    const json = await req.json()
    return json
 }

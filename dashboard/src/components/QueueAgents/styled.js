@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Section = styled.div`
     display: flex;
     height: 3vh;
     width: 98%;
@@ -10,14 +10,14 @@ const Container = styled.div`
 `
 
 const Title = styled.h2`
-    flex: 2;
+    flex: 1.5;
     color: #EEEEEE;
     margin-left: 10px;
 `
 
 const Serviced = styled.h3`
-    flex: 1;
+    flex: 1.5;
     color: #EEEEEE;
 `
 
-export  {Container, Title, Serviced}
+export  {Section, Title, Serviced}

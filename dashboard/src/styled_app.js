@@ -11,13 +11,13 @@ const ContainerAC = styled.article`
   flex: 1;
   position: relative;
   witdh: 50%;
-  margin-top: 20px;
+  margin-top: 1vh;
 `
 
 const ContainerQA = styled.article`
   flex: 1;
   witdh: 50%;
-  margin-top: 20px;
+  margin-top: 1vh;
 `
 
 const TitleCon = styled.h3`

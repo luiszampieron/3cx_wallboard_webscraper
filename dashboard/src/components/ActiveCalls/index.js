@@ -1,11 +1,11 @@
-import { Title, Time, Container, Phone } from "./styled"
+import { Title, Time, Section, Phone } from "./styled"
 
 export default ({user, time_called, phone}) => {
     return (
-        <Container>
-            <Title>Técnico: {user}</Title>
-            <Time>Tempo: {time_called}</Time>
-            <Phone>Telefone: {phone}</Phone>
-        </Container>
+        <Section>
+            <Title>{user}</Title>
+            <Time>{time_called}</Time>
+            <Phone>{phone}</Phone>
+        </Section>
     )
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Section = styled.div`
     display: flex;
     height: 5vh;
     background-color: #636363;
@@ -24,4 +24,4 @@ const Phone = styled.h3`
     color: #EEEEEE;
 `
 
-export  {Container, Title, Time, Phone}
+export  {Section, Title, Time, Phone}

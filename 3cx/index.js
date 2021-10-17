@@ -3,49 +3,49 @@ const fetch = require('cross-fetch')
 const configs = require('../configs')
 
 
-// Retorna um array de objetos que mostram a quantidade de ligação de todos os técnicos
+// Retorna um objeto com status gerais
 async function queue_stats(page) {
     const arr = []
 
-        const data = await page.evaluate(() => {
-            const selector = document.querySelectorAll('queue-stat td')
-            const list = [...selector]
-            const arrayList = list.map(item => {return item.outerText})
-            return arrayList
-        })
+    const data = await page.evaluate(() => {
+        const selector = document.querySelectorAll('queue-stat td')
+        const list = [...selector]
+        const arrayList = list.map(item => { return item.outerText })
+        return arrayList
+    })
 
-        data.splice(0, 6)
+    data.splice(0, 6)
 
-        obj = {
-            "waiting": data[0],
-            "serviced": data[1],
-            "abandoned": data[2],
-            "longest_waiting": data[3],
-            "average_waiting_time": data[4],
-            "average_talking_time": data[5],
-        }
-    
-        return obj
+    obj = {
+        "waiting": data[0],
+        "serviced": data[1],
+        "abandoned": data[2],
+        "longest_waiting": data[3],
+        "average_waiting_time": data[4],
+        "average_talking_time": data[5],
+    }
+
+    return obj
 }
 
-// Retorna um objeto com status gerais
+// Retorna um array de objetos que mostram a quantidade de ligação de todos os técnicos
 async function queue_agents(page) {
     const arr = []
 
     const name = await page.evaluate(() => {
         const selector = document.querySelectorAll('queue-agents a')
         const list = [...selector]
-        const arrayList = list.map(item => {return item.outerText}).filter(item => {return item != "Q"})
+        const arrayList = list.map(item => { return item.outerText }).filter(item => { return item != "Q" })
         return arrayList
     })
 
     const data = await page.evaluate(() => {
         const selector = document.querySelectorAll('queue-agents span')
         const list = [...selector]
-        const arrayList = list.map(item => {return item.outerText}).map(item => {
-            if(item.slice(0, 6) == "Logado") {
+        const arrayList = list.map(item => { return item.outerText }).map(item => {
+            if (item.slice(0, 6) == "Logado") {
                 return item.slice(0, 6)
-            } else if(item.slice(0, 9) == "Deslogado") {
+            } else if (item.slice(0, 9) == "Deslogado") {
                 return item.slice(0, 9)
             } else {
                 return item
@@ -55,9 +55,9 @@ async function queue_agents(page) {
     })
 
     let counterData = 0, counterName = 0
-    while(name.length > counterName) {
+    while (name.length > counterName) {
         data.splice(counterData, 0, name[counterName])
-        counterName ++
+        counterName++
         counterData += 5
     }
 

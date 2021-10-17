@@ -4,12 +4,32 @@ const configs = require('../configs')
 
 
 // Retorna um array de objetos que mostram a quantidade de ligação de todos os técnicos
-async function queue_agents(page) {
+async function queue_stats(page) {
+    const arr = []
+
+        const data = await page.evaluate(() => {
+            const selector = document.querySelectorAll('queue-stat td')
+            const list = [...selector]
+            const arrayList = list.map(item => {return item.outerText})
+            return arrayList
+        })
+
+        data.splice(0, 6)
+
+        obj = {
+            "waiting": data[0],
+            "serviced": data[1],
+            "abandoned": data[2],
+            "longest_waiting": data[3],
+            "average_waiting_time": data[4],
+            "average_talking_time": data[5],
+        }
     
+        return obj
 }
 
 // Retorna um objeto com status gerais
-async function queue_stats(page) {
+async function queue_agents(page) {
     const arr = []
 
     const name = await page.evaluate(() => {

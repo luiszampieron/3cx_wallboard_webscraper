@@ -5,12 +5,54 @@ const configs = require('../configs')
 
 // Retorna um array de objetos que mostram a quantidade de ligação de todos os técnicos
 async function queue_agents(page) {
-
+    
 }
 
 // Retorna um objeto com status gerais
 async function queue_stats(page) {
+    const arr = []
 
+    const name = await page.evaluate(() => {
+        const selector = document.querySelectorAll('queue-agents a')
+        const list = [...selector]
+        const arrayList = list.map(item => {return item.outerText}).filter(item => {return item != "Q"})
+        return arrayList
+    })
+
+    const data = await page.evaluate(() => {
+        const selector = document.querySelectorAll('queue-agents span')
+        const list = [...selector]
+        const arrayList = list.map(item => {return item.outerText}).map(item => {
+            if(item.slice(0, 6) == "Logado") {
+                return item.slice(0, 6)
+            } else if(item.slice(0, 9) == "Deslogado") {
+                return item.slice(0, 9)
+            } else {
+                return item
+            }
+        })
+        return arrayList
+    })
+
+    let counterData = 0, counterName = 0
+    while(name.length > counterName) {
+        data.splice(counterData, 0, name[counterName])
+        counterName ++
+        counterData += 5
+    }
+
+    for (let i = 0; i < data.length; i += 5) {
+        obj = {
+            user: data[i],
+            logged: data[i + 1],
+            answered: data[i + 2],
+            abandoned: data[i + 3],
+            talk_time: data[i + 4],
+        }
+        arr.push(obj)
+    }
+
+    return arr
 }
 
 // Retorna um array de objetos com os tecnicos que estão em ligação

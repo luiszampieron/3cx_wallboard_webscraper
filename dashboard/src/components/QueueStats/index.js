@@ -17,12 +17,8 @@ export default ({waiting, serviced, abandoned, longest_waiting, average_waiting_
                         <SpanRed>{abandoned}</SpanRed>
                 </Container>
                 <Container>
-                        <span>Média de espera:</span>
-                        <SpanYellow>{average_waiting_time}</SpanYellow>
-                </Container>
-                <Container>
-                        <span>Média de atendimento:</span>
-                        <SpanGreen>{average_talking_time}</SpanGreen>
+                        <span>Média de Atendimento:</span>
+                        <SpanYellow>{average_talking_time}</SpanYellow>
                 </Container>
             </Footer>
         </div>

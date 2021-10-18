@@ -1,10 +1,11 @@
-import { Section, Title, Serviced } from "./styled"
+import { Section, Title, Data } from "./styled"
 
-export default ({user, serviced_abandoned_time}) => {
+export default ({user, answered, abandoned, logged}) => {
     return (
-        <Section>
+        <Section logged={logged}>
             <Title>{user}</Title>
-            <Serviced>{serviced_abandoned_time}</Serviced>
+            <Data>{answered}</Data>
+            <Data>{abandoned}</Data>
         </Section>
     )
 }

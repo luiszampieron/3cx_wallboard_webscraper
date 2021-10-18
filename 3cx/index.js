@@ -44,9 +44,9 @@ async function queue_agents(page) {
         const list = [...selector]
         const arrayList = list.map(item => { return item.outerText }).map(item => {
             if (item.slice(0, 6) == "Logado") {
-                return item.slice(0, 6)
+                return item = true
             } else if (item.slice(0, 9) == "Deslogado") {
-                return item.slice(0, 9)
+                return item = false
             } else {
                 return item
             }
@@ -69,7 +69,10 @@ async function queue_agents(page) {
             abandoned: data[i + 3],
             talk_time: data[i + 4],
         }
-        arr.push(obj)
+
+        if(obj.answered != "0") {
+            arr.push(obj)
+        }
     }
 
     return arr
@@ -77,7 +80,8 @@ async function queue_agents(page) {
 
 // Retorna um array de objetos com os tecnicos que estão em ligação
 async function active_calls(page) {
-
+    const arr = []
+    return arr
 }
 
 // Faz o post na api

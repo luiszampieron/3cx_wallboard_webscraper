@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1845eec1.chunk.css",
+    "main.js": "/static/js/main.bdad65e1.chunk.js",
+    "main.js.map": "/static/js/main.bdad65e1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.43186fcb.js",
+    "runtime-main.js.map": "/static/js/runtime-main.43186fcb.js.map",
+    "static/js/2.e330c134.chunk.js": "/static/js/2.e330c134.chunk.js",
+    "static/js/2.e330c134.chunk.js.map": "/static/js/2.e330c134.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.1845eec1.chunk.css.map": "/static/css/main.1845eec1.chunk.css.map",
+    "static/js/2.e330c134.chunk.js.LICENSE.txt": "/static/js/2.e330c134.chunk.js.LICENSE.txt",
+    "static/media/logomarca.4157c6db.png": "/static/media/logomarca.4157c6db.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43186fcb.js",
+    "static/js/2.e330c134.chunk.js",
+    "static/css/main.1845eec1.chunk.css",
+    "static/js/main.bdad65e1.chunk.js"
+  ]
+}

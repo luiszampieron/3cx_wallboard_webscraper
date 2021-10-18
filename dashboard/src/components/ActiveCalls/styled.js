@@ -2,26 +2,43 @@ import styled from "styled-components";
 
 const Section = styled.div`
     display: flex;
+
     height: 5vh;
+    width: 98%;
+    margin: 3px 1% 0 1%;
+
     background-color: #636363;
-    margin: 5px 5px 0 10px;
     align-items: center;
+
+    white-space: nowrap;
 `
 
-const Title = styled.h2`
+const Title = styled.span`
     flex: 1.5;
     color: #EEEEEE;
     margin-left: 10px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 `
 
-const Time = styled.h3`
+const Time = styled.span`
     flex: 0.5;
     color: #EEEEEE;
+    margin-left: 10px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 
-const Phone = styled.h3`
+const Phone = styled.span`
     flex: 1;
     color: #EEEEEE;
+    margin-left: 10px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 
 export  {Section, Title, Time, Phone}

@@ -1,7 +1,5 @@
-import configs from '../../configs'
-
 const basicFetch = async (endpoint) => {
-   const req = await fetch(configs.ipMachine + "4000/api")
+   const req = await fetch('http://localhost:' + "4000/api")
    const json = await req.json()
    return json
 }

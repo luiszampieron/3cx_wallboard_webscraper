@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import logomarca from "./img/logomarca.png"
+import logomarca from "../../img/logomarca.png"
 
 const Container = styled.section`
   background: url(${logomarca}) center center;
@@ -9,14 +9,14 @@ const Container = styled.section`
   display: inline-flex;
   position: relative;
   height: 75vh;
-  width: 100vw;
+  width: 100%;
 `
 
 const ContainerAC = styled.article`
   flex: 1;
-  position: relative;
+  margin: 1vh 0 1vh 0;
   witdh: 50%;
-  margin-top: 1vh;
+  overflow: auto;
 `
 
 const ContainerQA = styled.article`
@@ -30,6 +30,10 @@ const TitleCon = styled.h3`
   margin: 10px;
   font-size: 35px;
   color: #EEEEEE;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const LogoBackground = styled.img`

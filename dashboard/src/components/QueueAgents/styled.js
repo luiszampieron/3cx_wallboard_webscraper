@@ -11,13 +11,34 @@ const Section = styled.div`
     align-items: center;
 
     white-space: nowrap;
+`
 
-    &:after {
-        content: ' ';
-        width: 10px;
-        height: 100%;
-        background-color: ${props => props.logged ? "#00ff48" : "ff0000"};
+const Logged = styled.span`
+display: flex;
+align-items: center;
+justify-content: center;
+color: #000000;
+width: 15px;
+height: 100%;
+
+background-color: ${props => {
+    switch(props.status) {
+        case 'Disponível':
+            return '#00ff48'
+            break
+        case 'Ausente':
+            return 'yellow'
+            break
+        case 'Deslogado':
+            return '#8f8f8f'
+            break
+        case 'Atendimento':
+            return '#7300ff'
+            break
+        default:
+            return ''
     }
+}}};
 `
 
 const Title = styled.span`
@@ -39,4 +60,4 @@ const Data = styled.span`
 `
 
 
-export  {Section, Title, Data}
+export  {Section, Logged, Title, Data}

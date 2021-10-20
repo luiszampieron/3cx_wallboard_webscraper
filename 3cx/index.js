@@ -32,14 +32,33 @@ async function queue_stats(page) {
 async function queue_agents(page) {
     const arr = []
 
-    const name = await page.evaluate(() => {
+    const getName = await page.evaluate(() => {
         const selector = document.querySelectorAll('queue-agents a')
         const list = [...selector]
         const arrayList = list.map(item => { return item.outerText }).filter(item => { return item != "Q" })
         return arrayList
     })
 
-    const data = await page.evaluate(() => {
+    const isOnline = await page.evaluate(() => {
+        const selector = document.querySelectorAll('wcavatar i')
+        const list = [...selector]
+        const arrayList = list.map(item => { return item.className }).map(item => item.split(' ')).map(item => {
+            if (item.indexOf("away") > -1) {
+                return 'Ausente'
+            } else if (item.indexOf("off") > -1) {
+                return 'Deslogado'
+            } else if (item.indexOf("available") > -1) {
+                return 'Disponível'
+            } else if (item.indexOf("busy") > -1) {
+                return 'Atendimento'
+            } else {
+                return 'Ocupado'
+            }
+        })
+        return arrayList
+    })
+
+    const getData = await page.evaluate(() => {
         const selector = document.querySelectorAll('queue-agents span')
         const list = [...selector]
         const arrayList = list.map(item => { return item.outerText }).map(item => {
@@ -55,32 +74,51 @@ async function queue_agents(page) {
     })
 
     let counterData = 0, counterName = 0
-    while (name.length > counterName) {
-        data.splice(counterData, 0, name[counterName])
+    while (getName.length > counterName) {
+        getData.splice(counterData, 0, getName[counterName])
+        getData.splice(counterData + 1, 0, isOnline[counterName])
         counterName++
-        counterData += 5
+        counterData += 6
     }
 
-    for (let i = 0; i < data.length; i += 5) {
+    for (let i = 0; i < getData.length; i += 6) {
         obj = {
-            user: data[i],
-            logged: data[i + 1],
-            answered: data[i + 2],
-            abandoned: data[i + 3],
-            talk_time: data[i + 4],
+            user: getData[i],
+            status: getData[i + 1],
+            logged: getData[i + 2],
+            answered: getData[i + 3],
+            abandoned: getData[i + 4],
+            talk_time: getData[i + 5],
         }
 
-        if(obj.answered != "0") {
+        if (obj.answered != "0") {
             arr.push(obj)
         }
     }
-
     return arr
 }
 
 // Retorna um array de objetos com os tecnicos que estão em ligação
 async function active_calls(page) {
     const arr = []
+
+    const getData = await page.evaluate(() => {
+        const selector = document.querySelectorAll('active-calls div.grid-item')
+        const list = [...selector]
+        const arrayList = list.map(item => { return item.innerText }).filter(item => {
+            if (item != "" && item.slice(0, 15) != "Chamada externa") { return item } })
+        arrayList.splice(0, 4)
+        return arrayList
+    })
+
+    for (let i = 0; i < getData.length; i += 3) {
+        obj = {
+            phone: getData[i],
+            user: getData[i + 1],
+            time_called: getData[i + 2],
+        }
+        arr.push(obj)
+    }
     return arr
 }
 

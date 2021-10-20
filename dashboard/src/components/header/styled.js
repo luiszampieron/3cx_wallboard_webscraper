@@ -13,7 +13,7 @@ const Cabecalho = styled.header`
 
 const Title = styled.h1`
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Bebas Neue';
     font-style: italic;
     color: #D2D4D4;
     font-size: 60px;

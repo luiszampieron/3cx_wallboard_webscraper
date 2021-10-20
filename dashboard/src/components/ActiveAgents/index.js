@@ -21,7 +21,11 @@ export default ({ dataDash }) => {
                 <TitleCon>Histórico de Atendimento:</TitleCon>
                 <QueueAgents user="Técnico:" abandoned="Abandonada:" answered="Atendida:" />
                 {dataDash.queue_agents.map((item, key) => (
-                    <QueueAgents user={item.user} abandoned={item.abandoned} answered={item.answered} logged={item.logged} key={key} />
+                    <QueueAgents user={item.user} 
+                    abandoned={item.abandoned} 
+                    answered={item.answered} 
+                    status={item.status} 
+                    logged={item.logged} key={key} />
                 ))}
             </ContainerQA>
         }

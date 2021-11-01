@@ -31,4 +31,4 @@ const Logo = styled.img`
     margin-left: 10px;
 `
 
-export {Cabecalho, Title, Container, Logo}
+export {Cabecalho, Logo}

@@ -1,41 +1,39 @@
 import styled from "styled-components"
 
-const Footer = styled.footer`
+const Footer = styled.menu`
     display: flex;
-    background-color: #333333;
     height: 15vh;
-    box-shadow: 0 0 20px #000000;
-
-    color: #EEEEEE;
+    color: #FFFFFF;
     justify-content: center;
-    font-size: 2.3vw;
-
+    align-items: center;
+    font-size: 25px;
     white-space: nowrap;
     overflow-x: hidden;
 `
 
 const Container = styled.div`
-    display: flex; 
-    flex-direction: column;
+    display: flex;
+    height: 10vh;
+    flex: 1;
 
-    witdh: 10%;
+    margin: 5px 5px 5px 5px;
+    border-radius: 4px;
 
     align-items: center;
     justify-content: center;
-    
-    padding: 10px 10px 10px 10px;
+    flex-direction: column;
+
+    background-color: ${props => {
+        switch(props.color){
+            case 'blue':
+                return '#219EBC;'
+            case 'green':
+                return '#44bd32;'
+            case 'red':
+                return '#e74c3c;'
+            case 'orange':
+                return '#FFB703;'
+        }}}
 `
 
-const SpanRed = styled.span`
-    color: #ff0000;
-`
-
-const SpanGreen = styled.span`
-    color: #00ff48;
-`
-
-const SpanYellow = styled.span`
-    color: yellow;
-`
-
-export {Footer, Container, SpanGreen, SpanRed, SpanYellow}
+export {Footer, Container}

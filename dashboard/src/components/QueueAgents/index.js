@@ -2,7 +2,7 @@ import { Section, Title, Data, Logged } from "./styled"
 
 export default ({user, answered, abandoned, status, logged}) => {
     return (
-        <Section>
+        <Section status={status}>
             <Logged status={status}>{logged && "Q"}</Logged>
             <Title>{user}</Title>
             <Data>{answered}</Data>

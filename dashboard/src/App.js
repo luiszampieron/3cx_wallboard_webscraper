@@ -25,12 +25,13 @@ function App() {
       <GlobalStyle />
 
       <Header />
-      <ActiveAgents dataDash={dataDash}/>      
       <QueueStats waiting={dataDash.queue_stats.waiting}
         serviced={dataDash.queue_stats.serviced}
         abandoned={dataDash.queue_stats.abandoned}
         average_waiting_time={dataDash.queue_stats.average_waiting_time}
         average_talking_time={dataDash.queue_stats.average_talking_time} />
+      <ActiveAgents dataDash={dataDash}/>      
+      
     </div>
   )
 }

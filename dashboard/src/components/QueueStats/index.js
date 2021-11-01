@@ -4,21 +4,21 @@ export default ({waiting, serviced, abandoned, longest_waiting, average_waiting_
     return(
         <div>
             <Footer>
-                <Container>
+                <Container color="orange">
                         <span>Aguardando:</span>
-                        <SpanYellow>{waiting}</SpanYellow>
+                        <span>{waiting}</span>
                 </Container>
-                <Container>
+                <Container color="green">
                         <span>Atendidas:</span>
-                        <SpanGreen>{serviced}</SpanGreen>
+                        <span>{serviced}</span>
                 </Container>
-                <Container>
-                        <span>Abandondas:</span>
-                        <SpanRed>{abandoned}</SpanRed>
+                <Container color="red">
+                        <span>Abandonadas:</span>
+                        <span>{abandoned}</span>
                 </Container>
-                <Container>
+                <Container color="blue">
                         <span>Média de Atendimento:</span>
-                        <SpanYellow>{average_talking_time}</SpanYellow>
+                        <span>{average_talking_time}</span>
                 </Container>
             </Footer>
         </div>

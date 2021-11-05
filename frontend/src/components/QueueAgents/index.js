@@ -1,12 +1,18 @@
-import { Section, Title, Data, Logged } from "./styled"
+import { Section, Stats, Title, Data, Nota } from "./styled"
 
-export default ({user, answered, abandoned, status, logged}) => {
+export default ({user, answered, abandoned, status, average}) => {
+    const arrElement = user.split(' ')
+    arrElement.shift()
+    const userNoRamal = arrElement.join(' ')
+
+
     return (
-        <Section status={status}>
-            <Logged status={status}>{logged && "Q"}</Logged>
-            <Title>{user}</Title>
+        <Section >
+            <Stats status={status}/>
+            <Title>{userNoRamal.toUpperCase()}</Title>
             <Data>{answered}</Data>
             <Data>{abandoned}</Data>
+            <Nota>{average}</Nota>
         </Section>
     )
 }

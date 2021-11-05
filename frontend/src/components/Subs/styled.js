@@ -2,49 +2,75 @@ import styled from "styled-components";
 
 const Section = styled.div`
     display: flex;
-
-    height: 3vh;
-    width: 98%;
-    margin: 3px 1% 0 1%;
-
-    align-items: center;
-
-    white-space: nowrap;
-
     
+    height: 8.5vh;
+    width: 39%;
+
+    flex-direction: column;
+    
+    position: absolute;
+    bottom: 0;
+
+    margin: 1vh 0.5% 1vh 0.5%;
+    border-radius: 10px;
+
+    background-color: #D7d7da;
+    white-space: nowrap;
 `
 
-const Data = styled.span`
+const Legend = styled.div`
+    display: flex;
     flex: 1;
+    
+    margin: 0 3% 1vh 3%;
+
+    align-items: center;
+    justify-content: space-between;
+
+`
+
+
+const Title = styled.span`
+display: flex;
+flex: 1;
+font-size: 17px;
+color: #0C568A;
+
+align-items: center;
+justify-content: center;
+`
+
+
+const Data = styled.span`
     position: relative;
-    color: #EEEEEE;
+    color: #4B4B4D;
+    font-size: 10px;
+    margin: 0 5px 0 0;
     overflow: hidden;
     text-overflow: ellipsis;
+`
 
-    &:after {
+const Color = styled.span`
+    width: 25px;
+    height: 25px;
+    background-color: ${props => {
+            switch (props.status) {
 
-        content: '';
-        position: absolute;
-        width: 15px;
-        height: 20px;
-        margin-left: 3px;
-        background-color: ${props => {
-            switch(props.status) {
                 case 'Disponível':
-                    return '#37E442;'
-                case 'Ausente':
-                    return '#FFC107;'
-                case 'Deslogado':
-                    return '#636363;'
-                case 'Atendimento':
-                    return '#E63946;'
+                    return '#00A859;'
                 case 'Ocupado':
-                    return '#f3722c;'
+                    return '#C52C4D;'
+                case 'Ausente':
+                    return '#F58634;'
+                case 'Deslogado':
+                    return 'rgba(114,115,118,1);'
+                case 'Atendimento':
+                    return '#26999C;'
                 default:
-                    return '#636363;'
+                    return '#0098DA;'
             }
         }}};
     }
 `
 
-export  {Section, Data}
+export { Section, Legend, Title, Data, Color }

@@ -1,39 +1,60 @@
 import styled from "styled-components"
 
-const Footer = styled.menu`
+const Menu = styled.menu`
     display: flex;
-    height: 15vh;
+    flex-direction: column;
+    height: 100%;
+
     color: #FFFFFF;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
-    white-space: nowrap;
+
     overflow-x: hidden;
 `
 
 const Container = styled.div`
     display: flex;
-    height: 10vh;
-    flex: 1;
-
-    margin: 5px 5px 5px 5px;
-    border-radius: 4px;
-
-    align-items: center;
+    height: 11vh;
+    width: 100%;
+    margin-top: ${props => props.margin ?  '0;' : '1vh;'}
     justify-content: center;
     flex-direction: column;
+    overflow: hidden;
 
+    border-radius: 10px;
+
+    
     background-color: ${props => {
-        switch(props.color){
+        switch (props.color) {
             case 'blue':
-                return '#219EBC;'
+                return '#0098DA;'
             case 'green':
-                return '#44bd32;'
+                return '#00A859;'
             case 'red':
-                return '#e74c3c;'
+                return '#C52C4D;'
             case 'orange':
-                return '#FFB703;'
-        }}}
+                return '#F58634;'
+            case 'golden':
+                return '#C6963C;'
+            case 'aqua':
+                return '#26999C;'
+        }
+    }}
 `
 
-export {Footer, Container}
+const Span = styled.span`
+    margin-top: 0.7vh;
+    font-size: ${props => {
+        switch (props.size) {
+            case '17':
+                return '17px;'
+            case '20':
+                return '20px;'
+            case '30':
+                return '30px;'             
+        }
+    }}
+    text-align: center;
+`
+
+export {Menu, Container, Span }

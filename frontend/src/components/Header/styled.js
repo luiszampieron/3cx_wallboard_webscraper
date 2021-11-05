@@ -4,31 +4,30 @@ import styled from 'styled-components'
 const Cabecalho = styled.header`
     display: flex;
     height: 10vh;
-    width: 100%;
 
-    background-color: #333333;
     justify-content: center;
-    box-shadow: 0 0 20px #000000;
+
+    white-space: nowrap;
 `
 
 const Title = styled.h1`
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-    font-family: 'Bebas Neue';
-    font-style: italic;
-    color: #D2D4D4;
-    font-size: 60px;
-`
+    display: flex;
 
-const Container = styled.div`
-    display: flex;  
+    flex-basis: 50%;
+    background-color: #046AAC;
+    border-radius: 0 0 25px 25px;
+
     align-items: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+    font-size: 1.7em;
+
+    overflow: hidden;
+
+    @media(max-width: 1060px) {
+        justify-content: start;
+    }
 `
 
-const Logo = styled.img`
-    width: auto;
-    height: auto;
-    padding: 10px 0 3px 0;
-    margin-left: 10px;
-`
-
-export {Cabecalho, Logo}
+export {Cabecalho, Title}

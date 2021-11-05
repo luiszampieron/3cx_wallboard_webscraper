@@ -1,13 +1,24 @@
-import { Section, Data } from "./styled"
+import { Section, Legend, Data, Color, Title } from "./styled"
 
 export default () => {
     return (
         <Section >
-            <Data status="Disponível">Disponível</Data>
-            <Data status="Ausente">Ausente</Data>
-            <Data status="Ocupado">Ocupado</Data>
-            <Data status="Atendimento">Atendimento</Data>
-            <Data status="Deslogado">Deslogado</Data>
+            <Title>
+                STATUS DOS TÉCNICOS
+            </Title>
+            <Legend>
+                <Color status="Disponível" />
+                <Data>DISPONÍVEL</Data>
+                <Color status="Ausente" />
+                <Data>AUSENTE</Data>
+                <Color status="Ocupado" />
+                <Data>OCUPADO</Data>
+                <Color status="Atendimento" />
+                <Data>EM ATENDIMENTO</Data>
+                <Color status="Deslogado" />
+                <Data>OFF</Data>
+            </Legend>
+
         </Section>
     )
 }

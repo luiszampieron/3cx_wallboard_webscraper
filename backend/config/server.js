@@ -11,8 +11,13 @@ app.use(function (req, res, next) {
     next()
 })
 
+app.set('view engine', 'ejs')
+app.set('views', './src/views')
+
+app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(express.static('./src/public'))
 app.use(express.static(path.join(__dirname, '../src/views/home')));
-app.path = path 
 
 consign()
     .include('./src/routes')

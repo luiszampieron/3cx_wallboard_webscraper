@@ -1,3 +1,3 @@
 module.exports.home = function(application, req, res) {
-    res.sendFile(application.path.join(__dirname, '../views/home', 'index.html'))
+    res.render('home/index.ejs')
 }

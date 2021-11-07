@@ -1,6 +1,6 @@
 import { Section, Title, Data, Nota, Stats } from "./styled"
 
-export default () => {
+const QueueAgentsTitle = () => {
     return (
         <Section>
             <Stats/>
@@ -11,3 +11,5 @@ export default () => {
         </Section>
     )
 }
+
+export default QueueAgentsTitle

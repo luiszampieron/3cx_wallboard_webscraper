@@ -1,6 +1,6 @@
 import { Section, Stats, Title, Data, Nota } from "./styled"
 
-export default ({user, answered, abandoned, status, average}) => {
+const QueueAgents = ({user, answered, abandoned, status, average}) => {
     const arrElement = user.split(' ')
     arrElement.shift()
     const userNoRamal = arrElement.join(' ')
@@ -16,3 +16,5 @@ export default ({user, answered, abandoned, status, average}) => {
         </Section>
     )
 }
+
+export default QueueAgents

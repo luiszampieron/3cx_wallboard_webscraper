@@ -1,6 +1,6 @@
 import { Title, Time, Section, Phone } from "./styled"
 
-export default () => {
+const ActiveCallsTitle = () => {
     return (
         <Section>
             <Title>TÉCNICOS</Title>
@@ -9,3 +9,5 @@ export default () => {
         </Section>
     )
 }
+
+export default ActiveCallsTitle

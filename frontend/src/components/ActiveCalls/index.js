@@ -1,6 +1,6 @@
 import { Title, Time, Section, Phone } from "./styled"
 
-export default ({user, time_called, phone}) => {
+const ActiveCalls = ({user, time_called, phone}) => {
     const arrElement = user.split('[')
     const userNoRamal = arrElement[0]
 
@@ -12,3 +12,5 @@ export default ({user, time_called, phone}) => {
         </Section>
     )
 }
+
+export default ActiveCalls

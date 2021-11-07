@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 const Section = styled.div`
     display: flex;
-    
-    height: 8.5vh;
-    width: 39%;
-
     flex-direction: column;
-    
+
     position: absolute;
     bottom: 0;
 
-    margin: 1vh 0.5% 1vh 0.5%;
+    height: 8.5vh;
+    width: 96%;
+
+    margin: 1vh 2% 1vh 2%;
     border-radius: 10px;
 
     background-color: #D7d7da;
@@ -20,32 +19,35 @@ const Section = styled.div`
 
 const Legend = styled.div`
     display: flex;
-    flex: 1;
-    
+
     margin: 0 3% 1vh 3%;
 
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
 `
 
 
 const Title = styled.span`
-display: flex;
-flex: 1;
-font-size: 17px;
-color: #0C568A;
+    display: flex;
+    flex: 1;
+    font-size: 17px;
+    color: #0C568A;
 
-align-items: center;
-justify-content: center;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 
 
 const Data = styled.span`
-    position: relative;
     color: #4B4B4D;
-    font-size: 10px;
-    margin: 0 5px 0 0;
+    font-size: 70%;
+
+    margin: 0 2% 0 3px;
+
     overflow: hidden;
     text-overflow: ellipsis;
 `
@@ -53,6 +55,9 @@ const Data = styled.span`
 const Color = styled.span`
     width: 25px;
     height: 25px;
+
+
+
     background-color: ${props => {
             switch (props.status) {
 
@@ -63,12 +68,9 @@ const Color = styled.span`
                 case 'Ausente':
                     return '#F58634;'
                 case 'Deslogado':
-                    return 'rgba(114,115,118,1);'
+                    return '#727376'
                 case 'Atendimento':
-                    return '#26999C;'
-                default:
                     return '#0098DA;'
-            }
         }}};
     }
 `

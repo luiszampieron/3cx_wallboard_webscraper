@@ -1,4 +1,4 @@
-import { Container, ContainerAC, ContainerQA, ContainerQS, TitleCon, DivTeste } from './styled'
+import {Container, ConQS, Con, TitleCon, Inner} from './styled'
 import QueueAgents from "../QueueAgents"
 import QueueAgentsTitle from '../QueueAgentsTitle'
 
@@ -8,7 +8,7 @@ import ActiveCallsTitle from '../ActiveCallsTitle'
 import QueueStats from '../QueueStats'
 import Subs from '../Subs'
 
-export default ({ dataDash }) => {
+const ContainerGeral = ({ dataDash }) => {
 
     function mergeData(dataDash) {
         for (let i = 0; i < dataDash.technicians_average.length; i++) {
@@ -27,37 +27,33 @@ export default ({ dataDash }) => {
         }
     }
 
-    function activeCallsOn() {
-            return <ContainerAC>
-                <TitleCon>FILA DE ATENDIMENTO</TitleCon>
-                <ActiveCallsTitle/>
-                {dataDash.active_calls.map((item, key) => (
-                    <ActiveCalls user={item.user} time_called={item.time_called} phone={item.phone} key={key} />
-                ))}
-            </ContainerAC>
-    }
-
     function QueueAgentsOn() {
         mergeData(dataDash)
-            return <ContainerQA>
+
+            return (
+            <Con>
                 <TitleCon>HISTÓRICO DE ATENDIMENTO</TitleCon>
                 <QueueAgentsTitle />
-                {dataDash.queue_agents.map((item, key) => (
-                    <QueueAgents user={item.user}
-                        abandoned={item.abandoned}
-                        answered={item.answered}
-                        status={item.status}
-                        logged={item.logged}
-                        average={item.average} key={key} />
-                ))}
-                    <Subs/>
+                <Inner size="47">
+                    {dataDash.queue_agents.map((item, key) => (
+                        <QueueAgents user={item.user}
+                            abandoned={item.abandoned}
+                            answered={item.answered}
+                            status={item.status}
+                            logged={item.logged}
+                            average={item.average} key={key} />
+                    ))}
+                </Inner>
+                
+                <Subs/>
 
-            </ContainerQA>
+            </Con> )
     }
 
     return (
         <Container>
-            <ContainerQS>
+
+            <ConQS>
                 <QueueStats waiting={dataDash.queue_stats.waiting}
                 serviced={dataDash.queue_stats.serviced}
                 abandoned={dataDash.queue_stats.abandoned}
@@ -65,15 +61,23 @@ export default ({ dataDash }) => {
                 average_talking_time={dataDash.queue_stats.average_talking_time}
                 ligacaoesAvaliadas={dataDash.overall_average.ligacaoesAvaliadas}
                 notaGeral={dataDash.overall_average.notaGeral} />
-            </ContainerQS>
-            {
-                activeCallsOn()
-            }
-            {
-                QueueAgentsOn()
-            }
-            
+            </ConQS>
+
+            <Con>
+                <TitleCon>FILA DE ATENDIMENTO</TitleCon>
+                <ActiveCallsTitle/>
+                <Inner>
+                    {dataDash.active_calls.map((item, key) => (
+                        <ActiveCalls user={item.user} time_called={item.time_called} phone={item.phone} key={key} />
+                    ))}
+                </Inner>
+
+            </Con> 
+
+            { QueueAgentsOn() }
             
         </Container>
     )
 }
+
+export default ContainerGeral

@@ -1,6 +1,6 @@
-import {Align, Menu, Container, Span } from './styled'
+import {Menu, Container, Span } from './styled'
 
-export default ({waiting, serviced, abandoned, average_talking_time, ligacaoesAvaliadas, notaGeral}) => {
+const QueueStats = ({waiting, serviced, abandoned, average_talking_time, ligacaoesAvaliadas, notaGeral}) => {
     return(
             <Menu>
                 <Container color="orange" margin>
@@ -30,3 +30,5 @@ export default ({waiting, serviced, abandoned, average_talking_time, ligacaoesAv
             </Menu>
     )
 }
+
+export default QueueStats

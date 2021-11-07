@@ -1,15 +1,15 @@
-import {Cabecalho, Title, Img} from './styled'
+import {FooterDiv, Title, Img} from './styled'
 import logo from '../../img/LogoDigisatBranco.png'
 
-function Footer() {
+function Footer({dataDash}) {
     return (
-        <Cabecalho>
+        <FooterDiv>
             <Title>
-            
+                {dataDash.msg.toUpperCase()}
             </Title>
             <Img src={logo}/>
             
-        </Cabecalho>
+        </FooterDiv>
     )
 }
 

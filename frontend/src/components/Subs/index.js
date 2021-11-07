@@ -1,6 +1,6 @@
 import { Section, Legend, Data, Color, Title } from "./styled"
 
-export default () => {
+const Subs = () => {
     return (
         <Section >
             <Title>
@@ -8,7 +8,7 @@ export default () => {
             </Title>
             <Legend>
                 <Color status="Disponível" />
-                <Data>DISPONÍVEL</Data>
+                <Data status="Disponível">DISPONÍVEL</Data>
                 <Color status="Ausente" />
                 <Data>AUSENTE</Data>
                 <Color status="Ocupado" />
@@ -22,3 +22,5 @@ export default () => {
         </Section>
     )
 }
+
+export default Subs

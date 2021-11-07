@@ -2,39 +2,68 @@ import styled from "styled-components"
 
 
 const Container = styled.section`
-  display: inline-flex;
-  position: relative;
+  display: flex;
   height: 70vh;
-  width: 100%;
+  width: 98,6%;
 
-  margin: 5vh 0 0 0.7%;
+  margin: 5vh 0.7% 0 0.7%;
 `
 
-const ContainerQS = styled.article`
-  width: 17%;
-  margin: 0 10px 0 0;
-
+const ConQS = styled.article`
+  width: 16.6%;
 `
 
-const ContainerAC = styled.article`
-  width: 40%;
-  margin: 0 10px 0 0;
+const Con = styled.article`
+  position: relative;
+  width: 41%;
+  margin-left: 0.7%;
+
   background-color: #FFFFFF;
   border-radius: 8px;
-
-  overflow: auto;
-
-
 `
 
-const ContainerQA = styled.article`
-
-  width: 40%;
-  margin: 0 10px 0 0;
-  background-color: #FFFFFF;
-  border-radius: 8px;
-
+const Inner = styled.div`
+  height: ${props => {
+    if(props.size === '47') {
+      return '47vh'
+    } else {
+      return '55vh'
+    }}};
   overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 21px;
+    height: 21px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4f4f4f;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #575757;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #5c5c5c;
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: 0px none #ffffff;
+    border-radius: 11px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-track:active {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }  
 `
 
 const TitleCon = styled.h3`
@@ -43,21 +72,15 @@ const TitleCon = styled.h3`
   align-items: center;
   justify-content: center;
  
-  position: sticky;
-  top: 0;
-
   font-size: 1.5rem;
 
   color: #FFFFFF;
   background-color: #00A859;
 
+  border-radius: 8px 8px 0 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `
 
-const DivTeste = styled.div`
-  position: absolute;
-`
-
-export {Container, ContainerQS, ContainerAC, ContainerQA, TitleCon, DivTeste}
+export {Container, ConQS, Con, TitleCon, Inner}

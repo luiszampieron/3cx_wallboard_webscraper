@@ -10,14 +10,6 @@ const Section = styled.div`
     white-space: nowrap;
 
     border-top: 1px solid #e0e0e0;
-
-    color: ${props => {
-        if(props.status === 'Deslogado' || props.status === 'Cabeçalho') {
-            return '#EEEEEE;'
-        } else {
-            return '#000000;'
-        }
-    }};
 `
 
 const Stats = styled.span`
@@ -33,11 +25,11 @@ const Stats = styled.span`
             case 'Deslogado':
                 return 'linear-gradient(90deg, rgba(114,115,118,1) 0%, rgba(255,255,255,0) 100%);'
             case 'Atendimento':
-                return 'linear-gradient(90deg, rgba(38,153,156,1) 0%, rgba(255,255,255,0) 100%);'
+                return 'linear-gradient(90deg, rgba(0,152,218,1) 0%, rgba(255,255,255,0) 100%);'
             case 'Ocupado':
                 return 'linear-gradient(90deg, rgba(197,44,77,1) 0%, rgba(255,255,255,0) 100%)'
             default:
-                return '#636363;'
+                return 'linear-gradient(90deg, rgba(114,115,118,1) 0%, rgba(255,255,255,0) 100%);'
         }
     }}};
 `

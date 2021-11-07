@@ -10,9 +10,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next()
 })
-app.use(express.static(path.join(__dirname, '../build')));
 
-app.pathh = path 
+app.use(express.static(path.join(__dirname, '../src/views/home')));
+app.path = path 
 
 consign()
     .include('./src/routes')

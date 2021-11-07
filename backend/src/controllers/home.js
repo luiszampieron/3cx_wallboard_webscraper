@@ -1,3 +1,3 @@
 module.exports.home = function(application, req, res) {
-    res.sendFile(application.pathh.join(__dirname, '../../build', 'index.html'))
+    res.sendFile(application.path.join(__dirname, '../views/home', 'index.html'))
 }

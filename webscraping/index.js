@@ -125,7 +125,7 @@ async function active_calls(page) {
 // Faz o post na api
 async function connectionApi(data) {
     try {
-        await fetch(configs.ipMachine + '4000/api', {
+        await fetch(configs.ipMachine + '4000/api/EnviarDadosGerais', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -1,3 +1,4 @@
+import React from "react"
 import { Section, Stats, Title, Data, Nota } from "./styled"
 
 const QueueAgents = ({user, answered, abandoned, status, average}) => {
@@ -17,4 +18,4 @@ const QueueAgents = ({user, answered, abandoned, status, average}) => {
     )
 }
 
-export default QueueAgents
+export default React.memo(QueueAgents)

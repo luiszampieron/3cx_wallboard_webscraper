@@ -1,16 +1,17 @@
-import {FooterDiv, Title, Img} from './styled'
+import React from 'react'
+import { FooterDiv, Title, Span, Img } from './styled'
 import logo from '../../img/LogoDigisatBranco.png'
 
-function Footer({dataDash}) {
+function Footer({ dataDash }) {
     return (
         <FooterDiv>
             <Title>
-                {dataDash.msg.toUpperCase()}
+                    {dataDash.msg ? <marquee style={{padding: 10}} scrollamount={3}>{dataDash.msg.toUpperCase()}</marquee> : ''}
             </Title>
-            <Img src={logo}/>
-            
+            <Img src={logo} />
+
         </FooterDiv>
     )
 }
 
-export default Footer
+export default React.memo(Footer)

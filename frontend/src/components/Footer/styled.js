@@ -12,7 +12,7 @@ const FooterDiv = styled.footer`
     white-space: nowrap;
 `
 
-const Title = styled.span`
+const Title = styled.div`
     display: flex;
 
     width: 90%;
@@ -30,37 +30,10 @@ const Title = styled.span`
     align-items: center;
 
     color: #FFFFFF;
+`
 
-    ::-webkit-scrollbar {
-        width: 7px;
-        height: 7px;
-      }
-      ::-webkit-scrollbar-button {
-        width: 0px;
-        height: 0px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #ffffff;
-        border: 0px none #ffffff;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #ededed;
-      }
-      ::-webkit-scrollbar-thumb:active {
-        background: #ffffff;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0098da;
-        border: 0px none #ffffff;
-        border-radius: 31px;
-      }
-      ::-webkit-scrollbar-track:hover {
-        background: #0098da;
-      }
-      ::-webkit-scrollbar-track:active {
-        background: #0098da;
-      }
+const Span = styled.span`
+  padding: 10px 0 10px 0;
 `
 
 const Img = styled.img`
@@ -69,4 +42,4 @@ const Img = styled.img`
     height: 3rem;
 `
 
-export {FooterDiv, Title, Img}
+export {FooterDiv, Title, Span, Img}

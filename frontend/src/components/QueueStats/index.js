@@ -1,3 +1,4 @@
+import React from 'react'
 import {Menu, Container, Span } from './styled'
 
 const QueueStats = ({waiting, serviced, abandoned, average_talking_time, ligacaoesAvaliadas, notaGeral}) => {
@@ -31,4 +32,4 @@ const QueueStats = ({waiting, serviced, abandoned, average_talking_time, ligacao
     )
 }
 
-export default QueueStats
+export default React.memo(QueueStats)

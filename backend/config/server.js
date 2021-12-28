@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, '../src/views/home')));
 consign()
     .include('./src/routes')
     .then('./src/controllers')
+    .then('./src/utils')
     .into(app)
 
 module.exports = app

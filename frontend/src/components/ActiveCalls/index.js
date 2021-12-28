@@ -1,3 +1,4 @@
+import React from "react"
 import { Title, Time, Section, Phone } from "./styled"
 
 const ActiveCalls = ({user, time_called, phone}) => {
@@ -13,4 +14,4 @@ const ActiveCalls = ({user, time_called, phone}) => {
     )
 }
 
-export default ActiveCalls
+export default React.memo(ActiveCalls)

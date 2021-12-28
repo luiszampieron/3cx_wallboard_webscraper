@@ -1,4 +1,4 @@
-import {Container, ConQS, Con, TitleCon, Inner} from './styled'
+import { Container, ConQS, Con, TitleCon, Inner } from './styled'
 import QueueAgents from "../QueueAgents"
 import QueueAgentsTitle from '../QueueAgentsTitle'
 
@@ -30,7 +30,7 @@ const ContainerGeral = ({ dataDash }) => {
     function QueueAgentsOn() {
         mergeData(dataDash)
 
-            return (
+        return (
             <Con>
                 <TitleCon>HISTÓRICO DE ATENDIMENTO</TitleCon>
                 <QueueAgentsTitle />
@@ -44,10 +44,10 @@ const ContainerGeral = ({ dataDash }) => {
                             average={item.average} key={key} />
                     ))}
                 </Inner>
-                
-                <Subs/>
 
-            </Con> )
+                <Subs />
+
+            </Con>)
     }
 
     return (
@@ -55,27 +55,27 @@ const ContainerGeral = ({ dataDash }) => {
 
             <ConQS>
                 <QueueStats waiting={dataDash.queue_stats.waiting}
-                serviced={dataDash.queue_stats.serviced}
-                abandoned={dataDash.queue_stats.abandoned}
-                average_waiting_time={dataDash.queue_stats.average_waiting_time}
-                average_talking_time={dataDash.queue_stats.average_talking_time}
-                ligacaoesAvaliadas={dataDash.overall_average.ligacaoesAvaliadas}
-                notaGeral={dataDash.overall_average.notaGeral} />
+                    serviced={dataDash.queue_stats.serviced}
+                    abandoned={dataDash.queue_stats.abandoned}
+                    average_waiting_time={dataDash.queue_stats.average_waiting_time}
+                    average_talking_time={dataDash.queue_stats.average_talking_time}
+                    ligacaoesAvaliadas={dataDash.overall_average.ligacaoesAvaliadas}
+                    notaGeral={dataDash.overall_average.notaGeral} />
             </ConQS>
 
             <Con>
                 <TitleCon>FILA DE ATENDIMENTO</TitleCon>
-                <ActiveCallsTitle/>
+                <ActiveCallsTitle />
                 <Inner>
                     {dataDash.active_calls.map((item, key) => (
                         <ActiveCalls user={item.user} time_called={item.time_called} phone={item.phone} key={key} />
                     ))}
                 </Inner>
 
-            </Con> 
+            </Con>
 
-            { QueueAgentsOn() }
-            
+            {QueueAgentsOn()}
+
         </Container>
     )
 }

@@ -13,6 +13,13 @@ module.exports = function(application) {
 
     application.post('/api/enviarmensagem', (req, res) => {
         application.src.controllers.api.api_mensagem_salvar(application, req, res)
-        res.redirect('/api')
+    })
+
+    application.get('/api/previsaotempo', (req, res) => {
+        application.src.controllers.api.api_previsao_tempo(application, req, res)
+    })
+
+    application.get('/api/previsaotempo/request', (req, res) => {
+        application.src.controllers.api.api_previsao_tempo_request(application, req, res)
     })
 }

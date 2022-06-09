@@ -8,7 +8,7 @@ module.exports.api_salvar = function (application, req, res) {
   if (items.queue_agents) {
     items.queue_agents.forEach((item) => {
       const existsFila = filaAusentes.find((user) => user.user == item.user);
-      if (item.status == "Ausente" || item.status == "Ocupado") {
+      if (item.status == "Ausente") {
         if (!existsFila) {
           item.offline_time = new Date();
           filaAusentes.push({ user: item.user, time: item.offline_time });

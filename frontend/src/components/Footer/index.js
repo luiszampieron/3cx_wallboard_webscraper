@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment, { min } from "moment";
 import React, { useEffect, useState } from "react";
 import logo from "../../img/LogoDigisatBranco.png";
 import { AusentesCards, Card, FooterDiv, FristCard, Img } from "./styled";
@@ -28,7 +28,7 @@ function Footer({ dataDash }) {
     const segundos = zeroPad(moment.duration(diff).seconds(), 2);
 
     let overtime = false;
-    if (minutos >= 10) {
+    if (minutos >= 10 || horas >= 1) {
       overtime = true;
     }
 

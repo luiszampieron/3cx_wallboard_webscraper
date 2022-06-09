@@ -1,56 +1,53 @@
 import styled from "styled-components";
 
 const Section = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 
-    height: 8.5vh;
-    width: 96%;
+  height: 8.5vh;
+  width: 96%;
 
-    margin: 1vh 2% 1vh 2%;
-    border-radius: 10px;
+  margin: 1vh 2% 1vh 2%;
+  border-radius: 10px;
 
-    background-color: #D7d7da;
-    white-space: nowrap;
-`
+  background-color: #d7d7da;
+  white-space: nowrap;
+`;
 
 const Legend = styled.div`
-    display: flex;
+  display: flex;
 
-    margin: 0 3% 1vh 3%;
+  margin: 0 3% 1vh 3%;
 
-    align-items: center;
-    justify-content: center;
-
-`
-
+  align-items: center;
+  justify-content: center;
+`;
 
 const Title = styled.span`
-    display: flex;
-    flex: 1;
-    font-size: 17px;
-    color: #0C568A;
+  display: flex;
+  flex: 1;
+  font-size: 17px;
+  color: #0c568a;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-`
-
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 const Data = styled.span`
-    color: #4B4B4D;
-    font-size: 70%;
+  color: #4b4b4d;
+  font-size: 70%;
 
-    margin: 0 2% 0 3px;
+  margin: 0 2% 0 3px;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 const Color = styled.span`
     width: 25px;
@@ -58,21 +55,23 @@ const Color = styled.span`
 
 
 
-    background-color: ${props => {
-            switch (props.status) {
-
-                case 'Disponível':
-                    return '#00A859;'
-                case 'Ocupado':
-                    return '#C52C4D;'
-                case 'Ausente':
-                    return '#F58634;'
-                case 'Deslogado':
-                    return '#727376'
-                case 'Atendimento':
-                    return '#0098DA;'
-        }}};
+    background-color: ${(props) => {
+      switch (props.status) {
+        case "Disponível":
+          return "#00A859;";
+        case "Ocupado":
+          return "#C52C4D;";
+        case "Ausente":
+          return "#F58634;";
+        case "Deslogado":
+          return "#727376";
+        case "Atendimento":
+          return "#0098DA;";
+        default:
+          return "#FFFFFF";
+      }
+    }};
     }
-`
+`;
 
-export { Section, Legend, Title, Data, Color }
+export { Section, Legend, Title, Data, Color };

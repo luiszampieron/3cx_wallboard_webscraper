@@ -1,17 +1,79 @@
-import React from 'react'
-import { FooterDiv, Title, Span, Img } from './styled'
-import logo from '../../img/LogoDigisatBranco.png'
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import logo from "../../img/LogoDigisatBranco.png";
+import { AusentesCards, Card, FooterDiv, FristCard, Img } from "./styled";
+
+const zeroPad = (num, places) => String(num).padStart(places, "0");
 
 function Footer({ dataDash }) {
-    return (
-        <FooterDiv>
-            <Title>
-                    {dataDash.msg ? <marquee style={{padding: 10}} scrollamount={3}>{dataDash.msg.toUpperCase()}</marquee> : ''}
-            </Title>
-            <Img src={logo} />
+  const [ausentes, setAusentes] = useState([]);
 
-        </FooterDiv>
-    )
+  useEffect(() => {
+    const items = dataDash.queue_agents.map((item) => {
+      if (item.offline_time) {
+        return item;
+      }
+
+      return undefined;
+    });
+
+    setAusentes(items.filter((item) => item && true));
+  }, [dataDash]);
+
+  const Diferenca = (antes) => {
+    const diff = moment().diff(moment(antes));
+
+    const horas = zeroPad(moment.duration(diff).hours(), 2);
+    const minutos = zeroPad(moment.duration(diff).minutes(), 2);
+    const segundos = zeroPad(moment.duration(diff).seconds(), 2);
+
+    let overtime = false;
+    if (minutos >= 10) {
+      overtime = true;
+    }
+
+    const tempo = `${horas}:${minutos}:${segundos}`;
+
+    return (
+      <span style={{ marginTop: 5, color: overtime ? "red" : "#FFFFFF" }}>
+        {tempo}
+      </span>
+    );
+  };
+
+  const User = (user) => {
+    if (user) {
+      const arrElement = user.split(" ");
+      arrElement.shift();
+      const userNoRamal = arrElement.join(" ");
+
+      return userNoRamal;
+    }
+    return ``;
+  };
+
+  return (
+    <div>
+      <FooterDiv>
+        <FristCard>
+          <span style={{ fontSize: 20, color: "#FFFFFF" }}>AUSENTES:</span>
+          <span style={{ fontSize: 30, color: "#FFFFFF", marginTop: 5 }}>
+            {ausentes.length}
+          </span>
+        </FristCard>
+        <AusentesCards>
+          {ausentes.map((item, key) => (
+            <Card key={key}>
+              <span>{User(item?.user)}</span>
+              {Diferenca(item.offline_time)}
+            </Card>
+          ))}
+        </AusentesCards>
+
+        <Img src={logo} />
+      </FooterDiv>
+    </div>
+  );
 }
 
-export default React.memo(Footer)
+export default React.memo(Footer);

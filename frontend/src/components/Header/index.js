@@ -12,33 +12,35 @@ import Clock from "./Clock";
 
 function Header({ weather }) {
   return (
-    <Cabecalho>
-      <Time>
-        <Clock date={new Date()} />
-      </Time>
-      <Title>PAINEL GERAL DOS ATENDIMENTOS</Title>
-      <Weather>
-        {weather?.Temperature?.Metric.Value && true ? (
-          <>
-            <Clima>
-              <Temp>{weather.Temperature.Metric.Value}</Temp>
-              <Graus style={{ paddingTop: 5 }}>ºC</Graus>
-            </Clima>
-            <Info>
-              <span>{weather.WeatherText}</span>
-              <span style={{ paddingTop: 5 }}>
-                Umidade: {weather.RelativeHumidity}%
-              </span>
-              <span style={{ paddingTop: 5 }}>
-                Vento: {weather.Wind.Speed.Metric.Value} Km/h
-              </span>
-            </Info>
-          </>
-        ) : (
-          <div />
-        )}
-      </Weather>
-    </Cabecalho>
+    <div>
+      <Cabecalho>
+        <Time>
+          <Clock date={new Date()} />
+        </Time>
+        <Title>PAINEL GERAL DOS ATENDIMENTOS</Title>
+        <Weather>
+          {weather?.temp && true ? (
+            <>
+              <Clima>
+                <Temp>{weather?.temp}</Temp>
+                <Graus style={{ paddingTop: 5 }}>ºC</Graus>
+              </Clima>
+              <Info>
+                <span>{weather?.description}</span>
+                <span style={{ paddingTop: 5 }}>
+                  Umidade: {weather?.humidity}%
+                </span>
+                <span style={{ paddingTop: 5 }}>
+                  Vento: {weather?.wind_speedy}
+                </span>
+              </Info>
+            </>
+          ) : (
+            <div />
+          )}
+        </Weather>
+      </Cabecalho>
+    </div>
   );
 }
 

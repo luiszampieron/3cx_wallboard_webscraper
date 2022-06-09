@@ -9,15 +9,12 @@ const get_clima = async () => {
     const weather = await basicFetch(
       "http://192.168.0.50:4000/api/previsaotempo"
     );
-    const api = {
-      weather: weather,
-    };
-    return api;
+    return { weather: weather };
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 
-  return "deu erro";
+  return false;
 };
 
 export default get_clima;

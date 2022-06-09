@@ -4,7 +4,7 @@ import GlobalStyle from "./GlobalStyle";
 import api from "./services/api";
 import weather from "./services/apiPrevisaoTempo";
 import Header from "./components/Header";
-import Conteiner from "./components/Conteiner";
+import Container from "./components/Container";
 import Footer from "./components/Footer";
 
 function App() {
@@ -27,17 +27,6 @@ function App() {
       if (dataDash !== requestApi) {
         setDataDash(requestApi);
       }
-    };
-
-    setInterval(() => {
-      loadAll();
-    }, 5000);
-
-    loadAll();
-  }, []);
-
-  useEffect(() => {
-    const loadAll = async () => {
       const requestWeather = await weather();
       if (weatherDash !== requestWeather) {
         setWeatherDash(requestWeather);
@@ -46,18 +35,28 @@ function App() {
 
     setInterval(() => {
       loadAll();
-    }, 1800000);
+    }, 5000);
 
     loadAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        flex: 1,
+        height: "100%",
+        flexDirection: "column",
+        padding: "0 10px 0 10px",
+      }}
+    >
       <GlobalStyle />
 
       <Header weather={weatherDash.weather} />
 
-      <Conteiner dataDash={dataDash} />
+      <Container dataDash={dataDash} />
 
       <Footer dataDash={dataDash} />
     </div>

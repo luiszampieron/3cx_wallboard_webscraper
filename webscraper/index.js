@@ -188,7 +188,10 @@ async function CreateJSON(page) {
 
 // Function main... Abre o navegador e chama as demais funções
 (async () => {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
   const page = await browser.newPage();
 
   // - Acessa página de login

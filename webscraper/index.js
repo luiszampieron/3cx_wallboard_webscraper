@@ -188,7 +188,7 @@ async function CreateJSON(page) {
 
 // Function main... Abre o navegador e chama as demais funções
 (async () => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   // - Acessa página de login

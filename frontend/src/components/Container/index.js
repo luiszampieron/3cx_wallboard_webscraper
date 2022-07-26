@@ -8,22 +8,21 @@ import { Con, ConQS, Container, Inner, TitleCon } from "./styled";
 
 const ContainerGeral = ({ dataDash }) => {
   function mergeData(dataDash) {
-    for (let i = 0; i < dataDash.technicians_average.length; i++) {
-      const nameAverage =
-        dataDash.technicians_average[i].nomeTecnico.split(" ");
-      const ramalAverage = nameAverage[nameAverage.length - 1];
+    const datadashh = dataDash.queue_agents.map((item) => {
+      const nota = dataDash.technicians_average.find((average) => {
+        const user = average.nomeTecnico.split(" ");
 
-      for (let c = 0; c < dataDash.queue_agents.length; c++) {
-        const nameQueue = dataDash.queue_agents[c].user.split(" ");
-        const ramalQueue = `[${nameQueue[0]}]`;
+        return user[user.length - 1] === `[${item.ramal}]`;
+      });
 
-        if (ramalAverage === ramalQueue) {
-          dataDash.queue_agents[c].average =
-            dataDash.technicians_average[i].mediaTecnico;
-          break;
-        }
+      if (nota) {
+        item.average = nota.mediaTecnico;
       }
-    }
+
+      return item;
+    });
+
+    return datadashh;
   }
 
   function ActiveCallsOn() {
@@ -54,15 +53,19 @@ const ContainerGeral = ({ dataDash }) => {
         <QueueAgentsTitle />
         <Inner size="47">
           {dataDash.queue_agents.map((item, key) => (
-            <QueueAgents
-              user={item.user}
-              abandoned={item.abandoned}
-              answered={item.answered}
-              status={item.status}
-              logged={item.logged}
-              average={item.average}
-              key={key}
-            />
+            <>
+              {item.status !== "Deslogado" && item.answered > 0 && (
+                <QueueAgents
+                  user={item.user}
+                  abandoned={item.abandoned}
+                  answered={item.answered}
+                  status={item.status}
+                  logged={item.logged}
+                  average={item.average}
+                  key={key}
+                />
+              )}
+            </>
           ))}
         </Inner>
 

@@ -1,4 +1,4 @@
-import moment, { min } from "moment";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import logo from "../../img/LogoDigisatBranco.png";
 import { AusentesCards, Card, FooterDiv, FristCard, Img } from "./styled";
@@ -17,7 +17,7 @@ function Footer({ dataDash }) {
       return undefined;
     });
 
-    setAusentes(items.filter((item) => item && true));
+    setAusentes(items.filter((item) => !!item));
   }, [dataDash]);
 
   const Diferenca = (antes) => {
@@ -41,32 +41,29 @@ function Footer({ dataDash }) {
     );
   };
 
-  const User = (user) => {
-    if (user) {
-      const arrElement = user.split(" ");
-      arrElement.shift();
-      const userNoRamal = arrElement.join(" ");
-
-      return userNoRamal;
-    }
-    return ``;
-  };
-
   return (
     <div>
       <FooterDiv>
         <FristCard>
           <span style={{ fontSize: 20, color: "#FFFFFF" }}>AUSENTES:</span>
           <span style={{ fontSize: 30, color: "#FFFFFF", marginTop: 5 }}>
-            {ausentes.length}
+            {
+              ausentes.filter(
+                (item) => item.status !== "Deslogado" && item.answered > 0
+              ).length
+            }
           </span>
         </FristCard>
         <AusentesCards>
           {ausentes.map((item, key) => (
-            <Card key={key}>
-              <span>{User(item?.user)}</span>
-              {Diferenca(item.offline_time)}
-            </Card>
+            <>
+              {item.status !== "Deslogado" && item.answered > 0 && (
+                <Card key={key}>
+                  <span>{item?.user}</span>
+                  {Diferenca(item.offline_time)}
+                </Card>
+              )}
+            </>
           ))}
         </AusentesCards>
 

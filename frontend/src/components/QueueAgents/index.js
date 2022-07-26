@@ -1,21 +1,16 @@
-import React from "react"
-import { Section, Stats, Title, Data, Nota } from "./styled"
+import React from "react";
+import { Section, Stats, Title, Data, Nota } from "./styled";
 
-const QueueAgents = ({user, answered, abandoned, status, average}) => {
-    const arrElement = user.split(' ')
-    arrElement.shift()
-    const userNoRamal = arrElement.join(' ')
+const QueueAgents = ({ user, answered, abandoned, status, average }) => {
+  return (
+    <Section>
+      <Stats status={status} />
+      <Title>{user.toUpperCase()}</Title>
+      <Data>{answered}</Data>
+      <Data>{abandoned}</Data>
+      <Nota>{average}</Nota>
+    </Section>
+  );
+};
 
-
-    return (
-        <Section >
-            <Stats status={status}/>
-            <Title>{userNoRamal.toUpperCase()}</Title>
-            <Data>{answered}</Data>
-            <Data>{abandoned}</Data>
-            <Nota>{average}</Nota>
-        </Section>
-    )
-}
-
-export default React.memo(QueueAgents)
+export default React.memo(QueueAgents);

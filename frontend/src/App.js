@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import Container from "./components/Container";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import GlobalStyle from "./GlobalStyle";
 import api from "./services/api";
 import weather from "./services/apiPrevisaoTempo";
-import Header from "./components/Header";
-import Container from "./components/Container";
-import Footer from "./components/Footer";
 
 function App() {
   const [dataDash, setDataDash] = useState({

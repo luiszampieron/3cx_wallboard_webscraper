@@ -1,184 +1,215 @@
-const puppeteer = require('puppeteer');
-const fetch = require('cross-fetch')
-const configs = require('../configs')
-
+const puppeteer = require("puppeteer");
+const fetch = require("cross-fetch");
+const configs = require("../configs");
 
 // Retorna um objeto com status gerais
 async function queue_stats(page) {
-    const arr = []
+  const data = await page.evaluate(() => {
+    const selector = document.querySelectorAll("queue-stat td");
+    const list = [...selector];
+    const arrayList = list.map((item) => {
+      return item.outerText;
+    });
+    return arrayList;
+  });
 
-    const data = await page.evaluate(() => {
-        const selector = document.querySelectorAll('queue-stat td')
-        const list = [...selector]
-        const arrayList = list.map(item => { return item.outerText })
-        return arrayList
-    })
+  data.splice(0, 6);
 
-    data.splice(0, 6)
+  obj = {
+    waiting: data[0],
+    serviced: data[1],
+    abandoned: data[2],
+    longest_waiting: data[3],
+    average_waiting_time: data[4],
+    average_talking_time: data[5],
+  };
 
-    obj = {
-        "waiting": data[0],
-        "serviced": data[1],
-        "abandoned": data[2],
-        "longest_waiting": data[3],
-        "average_waiting_time": data[4],
-        "average_talking_time": data[5],
-    }
-
-    return obj
+  return obj;
 }
 
 // Retorna um array de objetos que mostram a quantidade de ligação de todos os técnicos
 async function queue_agents(page) {
-    const arr = []
+  const arr = [];
 
-    const getName = await page.evaluate(() => {
-        const selector = document.querySelectorAll('queue-agents a')
-        const list = [...selector]
-        const arrayList = list.map(item => { return item.outerText }).filter(item => { return item != "Q" })
-        return arrayList
-    })
+  const getName = await page.evaluate(() => {
+    const selector = document.querySelectorAll("queue-agents li");
+    const list = [...selector].map((item) => {
+      return item.outerText;
+    });
 
-    const isOnline = await page.evaluate(() => {
-        const selector = document.querySelectorAll('wcavatar i')
-        const list = [...selector]
-        const arrayList = list.map(item => { return item.className }).map(item => item.split(' ')).map(item => {
-            if (item.indexOf("away") > -1) {
-                return 'Ausente'
-            } else if (item.indexOf("off") > -1) {
-                return 'Deslogado'
-            } else if (item.indexOf("available") > -1) {
-                return 'Disponível'
-            } else if (item.indexOf("busy") > -1) {
-                return 'Atendimento'
-            } else {
-                return 'Ocupado'
-            }
-        })
-        return arrayList
-    })
+    const arrayList = list
+      .map((item) => {
+        const arrayItem = item.split("\n").filter((item) => !!item);
 
-    const getData = await page.evaluate(() => {
-        const selector = document.querySelectorAll('queue-agents span')
-        const list = [...selector]
-        const arrayList = list.map(item => { return item.outerText }).map(item => {
-            if (item.slice(0, 6) == "Logado") {
-                return item = true
-            } else if (item.slice(0, 9) == "Deslogado") {
-                return item = false
-            } else {
-                return item
-            }
-        })
-        return arrayList
-    })
+        if (arrayItem[0].length === 2) arrayItem.splice(0, 1);
 
-    let counterData = 0, counterName = 0
-    while (getName.length > counterName) {
-        getData.splice(counterData, 0, getName[counterName])
-        getData.splice(counterData + 1, 0, isOnline[counterName])
-        counterName++
-        counterData += 6
-    }
+        const nameDivider = arrayItem[0].split(" ");
 
-    for (let i = 0; i < getData.length; i += 6) {
-        obj = {
-            user: getData[i],
-            status: getData[i + 1],
-            logged: getData[i + 2],
-            answered: getData[i + 3],
-            abandoned: getData[i + 4],
-            talk_time: getData[i + 5],
+        if (nameDivider[nameDivider.length - 1].toUpperCase() === "SUPORTE") {
+          nameDivider.pop();
+          arrayItem[0] = nameDivider.join(" ");
         }
 
-        if (obj.answered != "0") {
-            arr.push(obj)
+        return arrayItem;
+      })
+      .filter((item) => item[0].slice(0, 9) != "Deslogado");
+
+    return arrayList;
+  });
+
+  const isOnline = await page.evaluate(() => {
+    const selector = document.querySelectorAll("queue-agents li wcavatar i");
+    const list = [...selector];
+    const arrayList = list
+      .map((item) => {
+        return item.className;
+      })
+      .map((item) => item.split(" "))
+      .map((item) => {
+        if (item.indexOf("away") > -1) {
+          return "Ausente";
+        } else if (item.indexOf("off") > -1) {
+          return "Deslogado";
+        } else if (item.indexOf("available") > -1) {
+          return "Disponível";
+        } else if (item.indexOf("busy") > -1) {
+          return "Atendimento";
+        } else {
+          return "Ocupado";
         }
-    }
-    return arr
+      });
+    return arrayList;
+  });
+
+  const sortedName = getName.sort(function (a, b) {
+    if (a[0] > b[0]) return 1;
+    if (a[0] < b[0]) return -1;
+    return 0;
+  });
+
+  for (let i = 3; i < sortedName.length; i++) {
+    const obj = {
+      user: sortedName[i][0],
+      ramal: sortedName[i][1],
+      status: isOnline[i],
+      logged: true,
+      answered: sortedName[i][3],
+      abandoned: sortedName[i][4],
+      talk_time: sortedName[i][5],
+    };
+
+    arr.push(obj);
+  }
+
+  /* 
+    user: getData[i],
+    status: getData[i + 1],
+    logged: getData[i + 2],
+    answered: getData[i + 3],
+    abandoned: getData[i + 4],
+    talk_time: getData[i + 5],
+  */
+
+  return arr;
 }
 
 // Retorna um array de objetos com os tecnicos que estão em ligação
 async function active_calls(page) {
-    const arr = []
+  const arr = [];
 
-    const getData = await page.evaluate(() => {
-        const selector = document.querySelectorAll('active-calls div.grid-item')
-        const list = [...selector]
-        const arrayList = list.map(item => { return item.innerText }).filter(item => {
-            if (item != "" && item.slice(0, 15) != "Chamada externa") { return item } })
-        arrayList.splice(0, 4)
-        return arrayList
-    })
+  const getData = await page.evaluate(() => {
+    const selector = document.querySelectorAll("active-calls");
 
-    for (let i = 0; i < getData.length; i += 3) {
-        obj = {
-            phone: getData[i],
-            user: getData[i + 1],
-            time_called: getData[i + 2],
-        }
-        arr.push(obj)
-    }
-    return arr
+    const children = selector[0].children[0].children[1].children;
+
+    const list = [...children].map((item) => item.innerText);
+
+    list.pop();
+    list.shift();
+
+    const arrayList = list.map((item) => {
+      const arrayItem = item.split("\n");
+
+      const obj = {
+        phone: arrayItem[0],
+        user: arrayItem[1],
+        time_called: arrayItem[2],
+      };
+
+      return obj;
+    });
+
+    return arrayList;
+  });
+
+  if (getData.length) {
+    arr.push(...getData);
+  }
+
+  return arr;
 }
 
 // Faz o post na api
 async function connectionApi(data) {
-    try {
-        await fetch(configs.ipMachine + '4000/api/EnviarDadosGerais', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-    } catch {
-        console.log('Erro, verifique a conexão com a api')
-    }
-}
+  try {
+    await fetch(configs.ipMachine + "4000/api/EnviarDadosGerais", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
+    console.log("------DADOS-------");
+    console.log(JSON.stringify(data));
+    console.log("------------------");
+  } catch (e) {
+    console.error(e);
+    console.log("Erro, verifique a conexão com a api");
+  }
+}
 
 // Cria o JSON que será feito o post e já chama a conexão com a api
 async function CreateJSON(page) {
-    try {
-        data_active_calls = await active_calls(page)
-        data_queue_agents = await queue_agents(page)
-        data_queue_stats = await queue_stats(page)
+  try {
+    data_active_calls = await active_calls(page);
+    data_queue_agents = await queue_agents(page);
+    data_queue_stats = await queue_stats(page);
 
-        data = {
-            "active_calls": data_active_calls,
-            "queue_agents": data_queue_agents,
-            "queue_stats": data_queue_stats
-        }
-    } catch {
-        console.log('Erro, verifique se o firefox não sofreu alguma alteração')
-    }
+    data = {
+      active_calls: data_active_calls,
+      queue_agents: data_queue_agents,
+      queue_stats: data_queue_stats,
+    };
 
-    connectionApi(data)
+    connectionApi(data);
+  } catch (e) {
+    console.error(e.message);
+    console.log("Erro, verifique se o firefox não sofreu alguma alteração");
+  }
 }
 
 // Function main... Abre o navegador e chama as demais funções
 (async () => {
-    const browser = await puppeteer.launch({ headless: false })
-    const page = await browser.newPage()
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
 
-    // - Acessa página de login
-    await page.goto(configs.urlLogin)
+  // - Acessa página de login
+  await page.goto(configs.urlLogin);
 
-    // - Loga na página
-    await page.type('#loginInput', configs.user)
-    await page.type('#passwordInput', configs.password)
-    await page.click('#submitBtn')
+  // - Loga na página
+  await page.type("#loginInput", configs.user);
+  await page.type("#passwordInput", configs.password);
+  await page.click("#submitBtn");
 
+  // - Acessa página de wallboard
+  await page.waitForTimeout(3000);
+  await page.goto(configs.urlWallboard);
 
-    // - Acessa página de wallboard
-    await page.waitForTimeout(3000)
-    await page.goto(configs.urlWallboard)
+  await page.waitForTimeout(3000);
 
-    await page.waitForTimeout(3000)
-
-    setInterval(() => {
-        CreateJSON(page)
-    }, 5000)
-})()
+  setInterval(() => {
+    CreateJSON(page);
+  }, 5000);
+})();

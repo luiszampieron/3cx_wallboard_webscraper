@@ -160,10 +160,6 @@ async function connectionApi(data) {
       },
       body: JSON.stringify(data),
     });
-
-    console.log("------DADOS-------");
-    console.log(JSON.stringify(data));
-    console.log("------------------");
   } catch (e) {
     console.error(e);
     console.log("Erro, verifique a conexão com a api");
